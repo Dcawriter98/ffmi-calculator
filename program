@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+	<title>FFMI web app</title>
+</head>
+<body>
+<header><h1>Fat-Free Mass Index Calculator</h1></header>
+<br>
+<br>
+<article>
+<section>
+<form method="post" action"">
+Lean body mass (in kg):<br>
+  <input type="text" name="lbm"><br>
+  Height (in meters):<br>
+  <input type="text" name="height"><br><br>
+  <input type="submit">
+</form>
+<br>
+<br>
+<h2>Results</h2>
+
+</section>
+</article>
+
+<?php
+/*A web app to formulate the fat-free mass index from user-
+submitted information. Using PHP*/
+
+//Will need a converter from pounds to kg & inches to kilograms.
+
+//Calculate FFMI with the numbers entered | FFMI=lbm/h-squared + (6.1 x (1.8-h))
+
+//Convert Post variable numbers to regualr variables for easier coding
+
+$a = $_Post["lbm"];
+$b = $_Post["height"];
+$ffmi = 0;
+
+//FFMI formula calculation
+
+if (isset($_Post["lbm"] && $_Post["height"])) {
+
+	$ffmi = ($a / ($b*$b) ) + (6.1 * (1.8 - $b) );
+
+		echo '<p> Your FFMI is' . $ffmi '. </p>';
+
+} else {
+	echo '<p> No numbers were entered. Please try again.</p>';
+}
+
+//Determine FFMI range; output comment to the user. PHP comparator info found through stack overflow
+
+if ($ffmi < 17) {
+	
+	echo '<p>This result is a low level of muscle.</p>';
+
+} else ($ffmi > 17 and $ffmi <= 20) {
+	
+	echo '<p>This result is a level of an average college student in the United States or Europe.</p>';
+
+} else ($ffmi > 20 and $ffmi <= 23) {
+	
+	echo '<p>This result is a level of a noticeably muscular physique.</p>';
+
+} else ($ffmi > 23 and $ffmi <= 26) {
+	
+	echo '<p>This result represents a muscular physique approaching the upper limit.</p>';
+
+} else ($ffmi > 26) {
+	
+	echo '<p>This result represents a super-muscular physique.</p>'
+}
+?>
+<footer></footer>
+</body>
+</html>
